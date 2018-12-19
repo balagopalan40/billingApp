@@ -8,13 +8,14 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 
+import { CookieProviderService } from './services/cookie-provider/cookie-provider.service';
+import { AuthService } from './auth/auth.service';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
-    
-   
+    DashboardComponent   
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
 ],
-  providers: [],
+  providers: [
+    CookieProviderService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
