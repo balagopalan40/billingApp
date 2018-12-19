@@ -9,6 +9,23 @@ public class UserView {
 	@ApiModelProperty(value = "Name of the user", required = false, dataType = "java.lang.String", example = "Bala", position = 1)
 	private String name;
 	
-	@ApiModelProperty(value = "Age of the user", required = false, dataType = "java.lang.int", example = "25", position = 2)
-	private int age;
+	@ApiModelProperty(value = "Email of the user", required = false, dataType = "java.lang.String", example = "bala@gmail.com", position = 2)
+	private String email ;
+	
+	@ApiModelProperty(value = "Phone number of the user", required = false, dataType = "java.lang.long", example = "9738379638", position = 3)
+	private long phoneNumber;
+	
+	@ApiModelProperty(value = "Country code of the user", required = false, dataType = "java.lang.int", example = "91", position = 4)
+	private int countryCode;
+	
+	@ApiModelProperty(value = "Password code of the user", required = false, dataType = "java.lang.String", example = "anything", position = 5)
+	private String password;
+	
+	@ApiModelProperty(value = "Role of the user", required = false, dataType = "java.lang.String", example = "anything", position = 6)
+	private String role;
+	
+	public User ToUser() {
+		return User.builder().name(name).email(email).password(password).phoneNumber(phoneNumber).countryCode(countryCode).role(role).build();
+	}
+	
 }

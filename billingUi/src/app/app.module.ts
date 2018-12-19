@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppComponent,
     LoginComponent,
     DashboardComponent
+    
    
   ],
   imports: [
