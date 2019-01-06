@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiResponses;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(value="/users", description="Operations for the user CRUD")
 @RestController
@@ -31,11 +32,11 @@ public class UserController {
 	@ApiOperation(value = "Returns the list of all users", notes = "", response = UserView.class)
 	@ApiResponses({@ApiResponse(code = 200, message = "User list"), @ApiResponse(code = 400, message = "Invalid request")})
 	@GetMapping(value = "/")
-	public List<User> getAllUsers() {
-	  return userRepository.findAll();
+	public List<UserView> getAllUsers() {
+	  return userRepository.findAll().stream().map(UserView::FromUser).collect(Collectors.toList());
 	}
 
-	@ApiOperation(value = "Returns the list of all users", notes = "")
+	@ApiOperation(value = "Creates a new user", notes = "")
 	@ApiResponses({@ApiResponse(code = 200, message = "Success insertion"), @ApiResponse(code = 400, message = "Invalid request")})
 	@PostMapping(value = "/createUser" , consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void createUser(@RequestBody final UserView userView) {
@@ -65,9 +66,6 @@ public class UserController {
 	}
 	
 	public boolean checkSession(final String session) {
-		if(sessionRepository.findBySessionId(session)!=null) {
-		return true;
-		}
-	return false;	
+	return sessionRepository.findBySessionId(session)!=null;	
 	}
 }

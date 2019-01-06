@@ -1,9 +1,11 @@
 package com.billing.user;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class UserView {
 	
 	@ApiModelProperty(value = "Name of the user", required = false, dataType = "java.lang.String", example = "Bala", position = 1)
@@ -26,6 +28,10 @@ public class UserView {
 	
 	public User ToUser() {
 		return User.builder().name(name).email(email).password(password).phoneNumber(phoneNumber).countryCode(countryCode).role(role).build();
+	}
+	
+	public static UserView FromUser(User input) {
+		return UserView.builder().name(input.getName()).email(input.getEmail()).password(input.getPassword()).phoneNumber(input.getPhoneNumber()).countryCode(input.getCountryCode()).role(input.getRole()).build();
 	}
 	
 }
