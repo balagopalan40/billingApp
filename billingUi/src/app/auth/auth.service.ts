@@ -22,9 +22,11 @@ export class AuthService {
 	public cookieData:any;
 	public isLoggedin; //:Observable<any>
 	returnUrl: string;
+
 	private login_api = environment.API_URL + '/login_verification.php';
 	private login_authentication_api = environment.API_URL + '/login_authentication.php';
 	errorLogin : EventEmitter<any> = new EventEmitter<any>();
+	loggedIn : EventEmitter<any> = new EventEmitter<any>();
 
 
 	get loggin() {
@@ -32,6 +34,9 @@ export class AuthService {
 
 
   	}
+
+  	
+
 	constructor(public router: Router,private cookie: CookieProviderService,private route: ActivatedRoute,private http: Http) {
 		console.log("constructor of auth service");
 		 const data = this.cookie.getSessionId();
@@ -60,6 +65,9 @@ export class AuthService {
 		//this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
 	}
 
+getLogin(){
+  		this.loggedIn.emit(true);
+  	}
 
 
   private jwt() {
